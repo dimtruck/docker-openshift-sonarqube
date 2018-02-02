@@ -29,12 +29,3 @@ RUN yum -y install epel-release \
     && rm /tmp/sonarqube.zip*
 ADD root /
 
-RUN useradd -r sonar \
-    && chmod 775 $SONARQUBE_HOME/bin/run_sonarqube.sh \
-    && /usr/bin/fix-permissions /opt/sonarqube
-
-USER sonar
-WORKDIR $SONARQUBE_HOME
-VOLUME $SONARQUBE_HOME/data
-
-ENTRYPOINT ["./bin/run_sonarqube.sh"]
